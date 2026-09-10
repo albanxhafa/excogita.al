@@ -1,0 +1,280 @@
+@import "tailwindcss";
+
+@theme {
+  /* Warm paper, soft ink, one quiet green. Nothing here shouts - the
+     layout carries the personality, not the colour. */
+  --color-paper: #faf9f5;
+  --color-paper-tint: #f1efe8;
+  --color-ink: #17191b;
+  --color-slate: #5c6369;
+  --color-mute: #6e747b;
+  --color-line: #e3e0d7;
+
+  --color-moss: #2d6a4f;
+  --color-moss-soft: #eaf1ec;
+
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: "Newsreader", ui-serif, Georgia, serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 2.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  html {
+    background-color: var(--color-paper);
+  }
+
+  body {
+    background-color: transparent;
+    color: var(--color-ink);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* The page is still white - it just is not flat. Two fixed layers sit
+     behind everything: a faint dot grid on a 26px rhythm, and a tiled
+     fractal-noise grain that gives the white a paper tooth. Both are neutral
+     ink, never a colour wash - a tinted gradient reads as a smudge behind
+     text. Both are pointer-events:none at z-index -1, and body's background
+     must stay transparent or it paints over them. */
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  body::before {
+    background-image:
+      radial-gradient(circle,
+        color-mix(in srgb, var(--color-ink) 8%, transparent) 1px,
+        transparent 1.6px);
+    background-size: 26px 26px;
+    background-position: 0 0;
+    /* Fade the dots out behind the reading column and let them sit in the
+       margins, so the texture frames the content instead of showing through
+       the text. */
+    -webkit-mask-image: radial-gradient(ellipse 62% 55% at 50% 42%, transparent 35%, #000 88%);
+    mask-image: radial-gradient(ellipse 62% 55% at 50% 42%, transparent 35%, #000 88%);
+  }
+
+  body::after {
+    background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27180%27%20height%3D%27180%27%3E%3Cfilter%20id%3D%27g%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.9%27%20numOctaves%3D%274%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20type%3D%27saturate%27%20values%3D%270%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27180%27%20height%3D%27180%27%20filter%3D%27url%28%23g%29%27%2F%3E%3C%2Fsvg%3E");
+    background-size: 180px 180px;
+    opacity: 0.09;
+  }
+
+  ::selection {
+    background-color: var(--color-moss);
+    color: var(--color-paper);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-moss);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  /* The name, and the section headings, in the serif - the one place the
+     page allows itself a little elegance. */
+  .display {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    line-height: 1.02;
+  }
+
+  /* A small moss dot before a section heading. Marks structure without
+     needing a label above it. */
+  .marked {
+    position: relative;
+  }
+
+  .marked::before {
+    content: "";
+    position: absolute;
+    left: -1.15rem;
+    top: 0.62em;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 999px;
+    background: var(--color-moss);
+  }
+
+  /* Toolkit chips. One item per pill so the eye can pick a technology out
+     of the list instead of reading a comma-separated sentence. */
+  .tag {
+    display: inline-block;
+    border: 1px solid var(--color-line);
+    background: var(--color-paper-tint);
+    color: var(--color-ink);
+    border-radius: 999px;
+    padding: 0.2rem 0.7rem;
+    font-size: 13px;
+    line-height: 1.5;
+    white-space: nowrap;
+  }
+
+  /* The identity column pins while the work scrolls past it - but only when
+     the viewport is tall enough to show the whole column. On a short screen a
+     sticky element taller than the viewport strands its own lower half below
+     the fold, unreachable, so there it simply scrolls with the page. */
+  @media (min-width: 1024px) {
+    .pin { align-self: start; }
+  }
+
+  @media (min-width: 1024px) and (min-height: 820px) {
+    .pin {
+      position: sticky;
+      top: 6rem;
+    }
+  }
+
+  /* Section shortcuts. The leading dot is the same marker the section
+     headings carry, so the list reads as a contents index rather than as
+     another row of links. */
+  .jump {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.45rem;
+    color: var(--color-slate);
+    transition: color 160ms ease;
+  }
+
+  .jump::before {
+    content: "";
+    width: 0.3rem;
+    height: 0.3rem;
+    border-radius: 999px;
+    background: var(--color-line);
+    transition: background-color 160ms ease, transform 160ms ease;
+  }
+
+  .jump:hover {
+    color: var(--color-moss);
+  }
+
+  .jump:hover::before {
+    background: var(--color-moss);
+    transform: scale(1.3);
+  }
+
+  /* Profile links, sized as outline pills so they clear the 44px touch
+     minimum and balance the solid Email button beside them. */
+  .link-pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 1.15rem;
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    color: var(--color-slate);
+    transition: border-color 160ms ease, color 160ms ease;
+  }
+
+  .link-pill:hover {
+    border-color: var(--color-moss);
+    color: var(--color-moss);
+  }
+
+  .link-quiet {
+    border-bottom: 1px solid var(--color-line);
+    transition: border-color 160ms ease, color 160ms ease;
+  }
+
+  .link-quiet:hover {
+    border-bottom-color: var(--color-moss);
+    color: var(--color-moss);
+  }
+
+  /* ── Accordion ─────────────────────────────────────────────────────
+     Built on native <details>, so it works with the keyboard, with screen
+     readers, and before JavaScript loads. The custom chevron replaces the
+     default disclosure triangle. */
+  .acc > summary {
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .acc > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .acc > summary:hover .acc-title {
+    color: var(--color-moss);
+  }
+
+  .acc > summary .chev {
+    transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .acc[open] > summary .chev {
+    transform: rotate(180deg);
+  }
+
+  .acc[open] > .acc-body {
+    animation: rise 340ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  /* The footer prompt's cursor. A hard step blink, like a real terminal -
+     not a fade. The only thing on the page that moves continuously. */
+  .cursor {
+    animation: blink 1.2s steps(1, end) infinite;
+  }
+
+  @keyframes blink {
+    0%, 50%   { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  .rise {
+    animation: rise 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: var(--delay, 0ms);
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(0.6rem); }
+    to   { opacity: 1; transform: none; }
+  }
+}
+
+/* ── Touch targets ───────────────────────────────────────────────────────
+   Below the desktop breakpoint every standalone link must clear 44px. The
+   shortcuts grow their own box; the standalone site links keep their tight
+   underline and grow an invisible hit area instead, so the rule still sits
+   against the text. Links inline in a paragraph are deliberately left alone -
+   padding them would break the line box. */
+@media (max-width: 1023px) {
+  .jump {
+    min-height: 44px;
+    align-items: center;
+  }
+
+  .link-site {
+    position: relative;
+  }
+
+  .link-site::after {
+    content: "";
+    position: absolute;
+    inset: -12px -6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .rise { animation: none; opacity: 1; transform: none; }
+  .cursor { animation: none; opacity: 1; }
+  .acc[open] > .acc-body { animation: none; }
+  .acc > summary .chev { transition: none; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; }
+}

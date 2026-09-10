@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>excogita.al share card - source for assets/og.png</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,300;6..72,400&display=block">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1200px; height: 630px; overflow: hidden;
+    background: #faf9f5; color: #17191b;
+    font-family: "Instrument Sans", system-ui, sans-serif;
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding: 76px 80px 66px;
+    position: relative;
+  }
+
+  /* The same dot grid the site uses, kept to the margins so it frames
+     the text rather than sitting behind it. */
+  body::before {
+    content: ""; position: absolute; inset: 0; z-index: 0;
+    background-image: radial-gradient(circle, rgba(23,25,27,.08) 1px, transparent 1.6px);
+    background-size: 26px 26px;
+    -webkit-mask-image: radial-gradient(ellipse 58% 52% at 50% 45%, transparent 38%, #000 90%);
+            mask-image: radial-gradient(ellipse 58% 52% at 50% 45%, transparent 38%, #000 90%);
+  }
+  body > * { position: relative; z-index: 1; }
+
+  h1 {
+    font-family: "Newsreader", Georgia, serif; font-weight: 400;
+    font-size: 104px; line-height: 1; letter-spacing: -0.015em;
+  }
+
+  .role { margin-top: 18px; font-size: 30px; color: #5c6369; }
+
+  .rule { width: 84px; height: 3px; background: #2d6a4f; margin: 40px 0 34px; }
+
+  .lede {
+    font-size: 31px; line-height: 1.45; max-width: 21ch;
+    max-width: 990px;
+  }
+  .lede b { font-weight: 600; }
+
+  footer {
+    display: flex; align-items: baseline; justify-content: space-between;
+    border-top: 1px solid #e3e0d7; padding-top: 26px;
+  }
+  .domain { font-size: 27px; font-weight: 600; }
+  .latin { font-size: 22px; color: #8a9096; }
+  .latin em { color: #5c6369; }
+</style></head>
+<body>
+  <div>
+    <h1>Alban Xhafa</h1>
+    <p class="role">Senior software engineer - Tirana, Albania</p>
+    <div class="rule"></div>
+    <p class="lede">
+      Seven years building software end to end. I take products from
+      <b>concept and architecture through launch</b>, and lead the engineers
+      building them.
+    </p>
+  </div>
+
+  <footer>
+    <span class="domain">excogita.al</span>
+    <span class="latin"><em>excogita</em>, Latin - to think something into existence</span>
+  </footer>
+</body></html>

@@ -1,0 +1,5 @@
+# pnpm refuses to silently skip a dependency's build script, so the one
+# package that has one must be named. @parcel/watcher only speeds up
+# `tailwindcss --watch` - it falls back to polling, and CI never watches.
+allowBuilds:
+  '@parcel/watcher': false

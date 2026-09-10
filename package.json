@@ -1,0 +1,21 @@
+{
+  "name": "excogita-al",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Seven years building software end to end \u2014 web and mobile applications, backend systems, SDKs and cloud infrastructure across e-commerce, advertising technology and reservation platforms. I take products from concept and architecture through launch, and lead the engineers building them.",
+  "packageManager": "pnpm@12.3.4",
+  "scripts": {
+    "dev": "concurrently -n css,web -c yellow,cyan \"pnpm run dev:css\" \"vite\"",
+    "dev:css": "tailwindcss -i ./src/input.css -o ./assets/css/main.css --watch",
+    "build": "tailwindcss -i ./src/input.css -o ./assets/css/main.css --minify",
+    "assets": "bash tools/render-assets.sh",
+    "dist": "pnpm run build && bash tools/build-dist.sh"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "concurrently": "^10.0.5",
+    "tailwindcss": "^4.3.3",
+    "vite": "^8.2.2"
+  }
+}
