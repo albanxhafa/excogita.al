@@ -63,17 +63,7 @@
         building them.
       </p>
 
-      <nav aria-label="Sections" class="mt-7">
-        <ul class="flex flex-wrap gap-x-4 gap-y-2 text-[15px]">
-          <li><a class="jump" href="#what-i-do">What I do</a></li>
-          <li><a class="jump" href="#experience">Experience</a></li>
-          <li><a class="jump" href="#toolkit">Toolkit</a></li>
-          <li><a class="jump" href="#education">Education</a></li>
-          <li><a class="jump" href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-
-      <div class="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
+      <div class="profile-actions mt-8 flex flex-wrap items-center gap-x-3 gap-y-3">
         <a href="mailto:xhafaa0@gmail.com"
            class="inline-flex min-h-11 items-center rounded-full bg-ink px-5 text-[15px] font-medium text-paper transition-colors hover:bg-moss">
           Email me
@@ -84,28 +74,55 @@
            class="link-pill text-[15px]">LinkedIn</a>
       </div>
 
-      <div class="mt-9 border-t border-line pt-6 text-sm leading-relaxed text-mute">
-        <p class="flex items-baseline gap-2.5">
-          <span class="display text-xl italic text-ink">excogita</span>
-          <span>Latin, verb</span>
-        </p>
-
-        <p class="mt-2 text-slate">Devise, invent, think out, contrive.</p>
-
-        <p class="mt-2">
-          The imperative of <span class="italic">excogitare</span> - to find
-          something out by thinking, to bring it out by intense mental effort.
-        </p>
-      </div>
+      <nav aria-label="Page sections" class="section-index mt-9">
+        <p class="section-index-label">On this page</p>
+        <ol class="section-index-list">
+          <li>
+            <a class="section-index-link" data-section-link href="#expertise" aria-current="location">
+              <span class="section-index-number" aria-hidden="true">01</span>
+              <span>Expertise</span>
+              <svg class="section-index-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+          </li>
+          <li>
+            <a class="section-index-link" data-section-link href="#experience">
+              <span class="section-index-number" aria-hidden="true">02</span>
+              <span>Experience</span>
+              <svg class="section-index-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+          </li>
+          <li>
+            <a class="section-index-link" data-section-link href="#tech-stack">
+              <span class="section-index-number" aria-hidden="true">03</span>
+              <span>Tech stack</span>
+              <svg class="section-index-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+          </li>
+          <li>
+            <a class="section-index-link" data-section-link href="#education">
+              <span class="section-index-number" aria-hidden="true">04</span>
+              <span>Education</span>
+              <svg class="section-index-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+          </li>
+          <li>
+            <a class="section-index-link" data-section-link href="#contact">
+              <span class="section-index-number" aria-hidden="true">05</span>
+              <span>Contact</span>
+              <svg class="section-index-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+          </li>
+        </ol>
+      </nav>
 
     </aside>
 
     <!-- ══════════════  what: the column that scrolls  ══════════════ -->
     <main class="mt-16 lg:mt-0">
 
-      <!-- ── what I do ──────────────────────────────────────────── -->
-      <section id="what-i-do" class="rise" style="--delay:90ms">
-        <h2 class="marked display text-2xl">What I do</h2>
+      <!-- ── expertise ──────────────────────────────────────────── -->
+      <section id="expertise" class="rise" style="--delay:90ms">
+        <h2 class="marked display text-2xl">Expertise</h2>
         <dl class="mt-6 space-y-5">
           <div class="sm:grid sm:grid-cols-[10.5rem_1fr] sm:gap-6">
             <dt class="text-[15px] font-medium text-ink">Software engineering</dt>
@@ -137,7 +154,7 @@
             <summary class="flex items-start gap-4 py-5">
               <span class="flex-1">
                 <span class="acc-title block text-lg font-semibold transition-colors">Team lead &amp; software engineer</span>
-                <span class="mt-0.5 block text-[15px] text-mute">ReserveBar · Remote - USA</span>
+                <span class="mt-0.5 block text-[15px] text-mute">ReserveBar/LiquidCommerce · Remote - USA</span>
                 <span class="mt-0.5 block text-[15px] text-mute sm:hidden">Jun 2024 - now</span>
               </span>
               <span class="mt-1 hidden shrink-0 text-[15px] text-mute sm:block">Jun 2024 - now</span>
@@ -154,12 +171,9 @@
                 and evolution.
               </p>
 
-              <p class="mt-4 max-w-[64ch] rounded-xl bg-moss-soft px-4 py-3 text-[15px] leading-relaxed text-slate">
-                <span class="font-medium text-ink">One company, several names.</span>
-                ReserveBar and LiquidCommerce are the same business, since acquired by
-                VesperCommerce - now the parent of ReserveBar, LiquidCommerce and
-                AccelPay. I have worked across AccelPay as well. If you know the group
-                by any one of those names, it is the same place.
+              <p class="mt-4 max-w-[64ch] text-[15px] leading-relaxed text-mute">
+                ReserveBar, LiquidCommerce and AccelPay operate under the
+                VesperCommerce umbrella.
               </p>
 
               <h4 class="mt-7 text-[15px] font-semibold">What I built there</h4>
@@ -483,9 +497,9 @@
         </div>
       </section>
 
-      <!-- ── toolkit ────────────────────────────────────────────── -->
-      <section id="toolkit" class="mt-16 rise" style="--delay:250ms">
-        <h2 class="marked display text-2xl">Toolkit</h2>
+      <!-- ── tech stack ─────────────────────────────────────────── -->
+      <section id="tech-stack" class="mt-16 rise" style="--delay:250ms">
+        <h2 class="marked display text-2xl">Tech stack</h2>
         <div class="mt-7 space-y-5">
           <div class="sm:grid sm:grid-cols-[13rem_1fr] sm:gap-6">
             <h3 class="text-[15px] font-medium text-ink">Programming languages</h3>
@@ -711,6 +725,17 @@
         </div>
       </section>
 
+      <footer class="mt-10 border-t border-line pt-6 text-sm leading-relaxed text-mute">
+        <p class="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
+          <span class="display text-xl italic text-ink">excogita</span>
+          <span>Latin, verb</span>
+          <span class="text-slate">Devise, invent, think out, contrive.</span>
+        </p>
+        <p class="mt-2 max-w-[64ch]">
+          The imperative of <span class="italic">excogitare</span> - to find
+          something out by thinking, to bring it out by intense mental effort.
+        </p>
+      </footer>
 
     </main>
   </div>

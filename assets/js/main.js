@@ -1,6 +1,43 @@
-// excogita.al - copy-to-clipboard and an accordion fallback.
+// excogita.al - section tracking, copy-to-clipboard and accordion fallback.
 (() => {
   'use strict';
+
+  // ── section index ──────────────────────────────────────────────────────
+  const sectionLinks = [...document.querySelectorAll('[data-section-link]')];
+  const sections = sectionLinks
+    .map((link) => document.querySelector(link.hash))
+    .filter(Boolean);
+
+  function markCurrentSection(id) {
+    for (const link of sectionLinks) {
+      if (link.hash === `#${id}`) {
+        link.setAttribute('aria-current', 'location');
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    }
+  }
+
+  if (sections.length) {
+    const hashTarget = sectionLinks.find((link) => link.hash === window.location.hash);
+    markCurrentSection(hashTarget ? hashTarget.hash.slice(1) : sections[0].id);
+
+    for (const link of sectionLinks) {
+      link.addEventListener('click', () => markCurrentSection(link.hash.slice(1)));
+    }
+
+    if ('IntersectionObserver' in window) {
+      const sectionObserver = new IntersectionObserver((entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+        if (visible.length) markCurrentSection(visible[0].target.id);
+      }, { rootMargin: '-22% 0px -60% 0px' });
+
+      for (const section of sections) sectionObserver.observe(section);
+    }
+  }
 
   // ── copy to clipboard ──────────────────────────────────────────────────
   const toast = document.getElementById('toast');

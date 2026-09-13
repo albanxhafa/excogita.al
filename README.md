@@ -140,24 +140,19 @@ So future edits stay coherent:
   compiled stylesheet is only 14KB. It earns its place - keep it.
 
 - **Palette.** Warm paper (`#fbfaf7`) and soft ink (`#17191b`), with one quiet
-  green (`--color-moss`, `#2d6a4f`) as the only accent. Moss appears in three
-  places and nowhere else: the section dots, the project fact lines, and the
-  contact panel. If you add a fourth use, take one away.
+  green (`--color-moss`, `#2d6a4f`) as the only accent. Moss is reserved for
+  structural feedback, project fact lines and the contact panel.
 - **Type.** Newsreader (serif) for the name and section headings - the one
   place the page allows itself some elegance. Instrument Sans for everything
   else. Body copy sits at a normal reading size; nothing is oversized.
-- **Structure.** Two columns on desktop: who you are pinned on the left, what
-  you have done scrolling on the right. Below `lg` it stacks into one column in
-  the same order. There is no navigation - the page is short enough not to need
-  it.
+- **Structure.** Two columns on desktop: who you are and a compact section
+  index pinned on the left, with the work scrolling on the right. Below `lg`
+  it stacks into one column in the same order and the index becomes two columns.
 - **The pinned column.** The identity column uses `.pin`, not a Tailwind
-  `lg:sticky`, because sticking is conditional: it only pins at `min-width:
-  1024px` **and** `min-height: 820px`. The column is ~703px tall, and a sticky
-  element taller than the viewport strands its own lower half below the fold
-  where nobody can scroll to it. On a short screen it just scrolls normally.
-  The breakpoint is the column height plus the 6rem offset plus a little
-  slack - if you add anything to that column, measure it and move the
-  breakpoint to match.
+  `lg:sticky`, because sticking is conditional on both desktop width and enough
+  height to keep the entire column reachable. On a short screen it simply
+  scrolls with the page. If you add anything to that column, measure it and
+  adjust the height breakpoint rather than stranding content below the fold.
 - **The dots.** Each section heading carries a small moss dot that hangs into
   the left margin (`.marked::before`, `left: -1.15rem`). It marks structure
   without needing a label above the heading. It hangs *outside* the text
@@ -183,9 +178,9 @@ So future edits stay coherent:
   four capability lines. Both PNGs are generated from HTML with headless
   Chrome - regenerate them the same way if the design changes, and keep the OG
   image at exactly 1200×630.
-- **The footer prompt.** `root@excogita:~#` with a blinking block cursor, in a
-  system monospace stack (no extra webfont). It is the only thing on the page
-  that moves continuously, and `prefers-reduced-motion` freezes it visible.
+- **The footer.** The meaning of *excogita* sits after the contact panel as a
+  quiet sign-off. Keeping it out of the identity column brings the work closer
+  on mobile and leaves room for the section index on laptop screens.
 - **Motion.** One load moment: the columns rise in a short stagger. Nothing
   animates on its own after that, and `prefers-reduced-motion` disables it.
 - **Responsive.** Verified with no horizontal overflow from 320px up.
