@@ -12,7 +12,7 @@ cd "$root"
 rm -rf dist
 mkdir -p dist
 
-cp index.html robots.txt CNAME dist/
+cp index.html cv.html robots.txt CNAME dist/
 cp -R assets dist/assets
 
 # Cheap insurance: only matters if Pages is ever switched from the Actions

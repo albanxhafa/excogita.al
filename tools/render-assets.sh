@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Regenerates the two raster assets from their HTML sources.
 #
-#   assets/og.png       1200x630 link-preview card  <- tools/og.html
+#   assets/og.png       1200x630 CV link-preview card       <- tools/og.html
+#   assets/og-home.png  1200x630 homepage link-preview card <- tools/og-home.html
 #   assets/icon-180.png iOS home-screen icon        <- tools/icon.html (favicon.svg)
 #
 # Both are committed, so you only need this after changing the design.
@@ -27,6 +28,7 @@ render() {
 }
 
 echo "Rendering assets:"
-render tools/og.html   assets/og.png       1200 630
+render tools/og.html      assets/og.png      1200 630
+render tools/og-home.html assets/og-home.png 1200 630
 render tools/icon.html assets/icon-180.png  180 180
 echo "Done."

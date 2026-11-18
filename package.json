@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "description": "Seven years building software end to end \u2014 web and mobile applications, backend systems, SDKs and cloud infrastructure across e-commerce, advertising technology and reservation platforms. I take products from concept and architecture through launch, and lead the engineers building them.",
-  "packageManager": "pnpm@12.3.4",
+  "packageManager": "pnpm@12.21.0",
   "scripts": {
     "dev": "concurrently -n css,web -c yellow,cyan \"pnpm run dev:css\" \"vite\"",
     "dev:css": "tailwindcss -i ./src/input.css -o ./assets/css/main.css --watch",
@@ -13,9 +13,9 @@
     "dist": "pnpm run build && bash tools/build-dist.sh"
   },
   "devDependencies": {
-    "@tailwindcss/cli": "^4.3.3",
-    "concurrently": "^10.0.5",
-    "tailwindcss": "^4.3.3",
-    "vite": "^8.2.2"
+    "@tailwindcss/cli": "^4.3.5",
+    "concurrently": "^10.0.7",
+    "tailwindcss": "^4.3.5",
+    "vite": "^8.3.8"
   }
 }

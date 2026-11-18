@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>excogita.al homepage share card - source for assets/og-home.png</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,400&display=block">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1200px; height: 630px; overflow: hidden;
+    background: #faf9f5; color: #17191b;
+    font-family: "Instrument Sans", system-ui, sans-serif;
+    display: flex; flex-direction: column;
+    padding: 52px 80px 56px;
+    position: relative;
+  }
+
+  /* The homepage's dot grid, faded out behind the word so it frames the
+     entry instead of showing through it. */
+  body::before {
+    content: ""; position: absolute; inset: 0; z-index: 0;
+    background-image: radial-gradient(circle, rgba(23,25,27,.08) 1px, transparent 1.6px);
+    background-size: 26px 26px;
+    -webkit-mask-image: radial-gradient(ellipse 60% 56% at 50% 42%, transparent 40%, #000 90%);
+            mask-image: radial-gradient(ellipse 60% 56% at 50% 42%, transparent 40%, #000 90%);
+  }
+  body > * { position: relative; z-index: 1; }
+
+  main {
+    flex: 1;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+  }
+
+  /* Same construction as .headword / .morph in src/input.css, scaled for
+     a 1200px card: the word as its two morphemes, each bracketed and
+     glossed. */
+  .headword {
+    display: inline-flex; align-items: flex-start;
+    font-family: "Newsreader", Georgia, serif; font-weight: 300;
+    font-size: 176px; line-height: 1.08; letter-spacing: -0.03em;
+  }
+  .morph { display: inline-flex; flex-direction: column; }
+  /* Heavier than the site's 1px rule: unfurls show the card at ~400px
+     wide, where a thinner bracket disappears. */
+  .bracket {
+    height: 14px; margin: 0.04em 0.05em 0;
+    border: 2.5px solid rgba(23,25,27,.5); border-top: 0;
+  }
+  .gloss {
+    margin-top: 10px;
+    font-family: "Newsreader", Georgia, serif; font-style: italic; font-weight: 400;
+    font-size: 36px; line-height: 1.2; letter-spacing: 0;
+    color: #2d6a4f;
+  }
+
+  .def {
+    margin-top: 34px;
+    font-family: "Newsreader", Georgia, serif; font-weight: 400;
+    font-size: 44px; line-height: 1.2; letter-spacing: -0.015em;
+  }
+
+  footer {
+    display: flex; align-items: baseline; justify-content: space-between;
+    border-top: 1px solid #e3e0d7; padding-top: 24px;
+  }
+  .who { font-size: 27px; color: #5c6369; }
+  .who b { color: #17191b; font-weight: 600; }
+  .domain { font-size: 27px; font-weight: 600; }
+</style></head>
+<body>
+  <main>
+    <div class="headword">
+      <span class="morph"><span>ex</span><span class="bracket"></span><span class="gloss">out</span></span>
+      <span class="morph"><span>cōgitā</span><span class="bracket"></span><span class="gloss">think</span></span>
+    </div>
+    <p class="def">To think a thing through until it exists.</p>
+  </main>
+
+  <footer>
+    <span class="who"><b>Alban Xhafa</b> - Senior software engineer, Tirana</span>
+    <span class="domain">excogita.al</span>
+  </footer>
+</body></html>

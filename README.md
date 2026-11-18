@@ -1,7 +1,8 @@
 # excogita.al
 
-A single static page introducing Alban Xhafa - software engineer and team lead -
-built to hand to employers and clients who ask for a link.
+Two static pages. The homepage (`/`) is a dictionary entry for the word
+*excogita*. The CV (`/cv`) introduces Alban Xhafa - software engineer and team
+lead - and is the link to hand to employers and clients.
 
 Plain HTML, Tailwind CSS compiled to one stylesheet, and about 30 lines of
 vanilla JavaScript. No framework, no runtime build step, no server.
@@ -16,7 +17,7 @@ that, because any one of them can be ignored on its own:
 
 | Layer | File | What it does |
 | --- | --- | --- |
-| Page meta tags | `index.html` | `noindex, nofollow, noarchive, nosnippet, noimageindex` for all robots, plus explicit `googlebot` and `bingbot` directives |
+| Page meta tags | `index.html`, `cv.html` | `noindex, nofollow, noarchive, nosnippet, noimageindex` for all robots, plus explicit `googlebot` and `bingbot` directives |
 | Crawl blocklist | `robots.txt` | `Disallow: /` for every user-agent, then named entries for search, archive, SEO and AI-training crawlers (GPTBot, ClaudeBot, CCBot, Google-Extended, PerplexityBot, Bytespider, Applebot-Extended and others) |
 | Absence | - | No `sitemap.xml`, no canonical link, no Open Graph or Twitter card tags, no JSON-LD structured data |
 
@@ -29,8 +30,9 @@ that, because any one of them can be ignored on its own:
 - analytics, tag managers, or verification tokens for Search Console / Bing
   Webmaster Tools - registering the domain there invites a crawl
 
-**The one deliberate exception is link previews.** The page carries `og:*` and
-`twitter:image` tags pointing at `assets/og.png`, so sharing the link in Slack,
+**The one deliberate exception is link previews.** Both pages carry `og:*` and
+`twitter:image` tags - the homepage pointing at `assets/og-home.png`, the CV at
+`assets/og.png` - so sharing either link in Slack,
 WhatsApp, LinkedIn or iMessage produces a card instead of a bare URL. These are
 read by unfurlers, not by search indexers, and the `noindex` meta tags and the
 `X-Robots-Tag` header still apply to every one of them.
@@ -44,8 +46,8 @@ page. Note the pairs that look similar but are not: `Slackbot` unfurls while
 `Slurp` crawls; `facebookexternalhit` unfurls while `FacebookBot` crawls. The
 crawlers stay blocked.
 
-If you ever decide you want no previews either, delete the `og:*` block from
-`index.html` and the preview-bot section from `robots.txt` together - leaving
+If you ever decide you want no previews either, delete the `og:*` blocks from
+`index.html` and `cv.html` and the preview-bot section from `robots.txt` together - leaving
 one without the other just produces broken cards.
 
 There is deliberately **no fourth layer**: a `_headers` file used to declare
@@ -97,11 +99,12 @@ only a dev server - it does not bundle anything, and there is no `vite build`
 step. What you deploy is exactly the files in this directory.
 
 ```bash
-pnpm assets      # regenerate assets/og.png and assets/icon-180.png
+pnpm assets      # regenerate assets/og.png, assets/og-home.png and assets/icon-180.png
 ```
 
-You only need `pnpm assets` after changing the card or icon design - both PNGs
-are committed. It needs Google Chrome; set `CHROME=/path/to/chrome` if yours is
+You only need `pnpm assets` after changing a card or the icon design - all
+three PNGs are committed. If you change the homepage definition or your title,
+update `tools/og-home.html` to match and re-run it. It needs Google Chrome; set `CHROME=/path/to/chrome` if yours is
 somewhere unusual.
 
 `assets/css/main.css` is a build output but is **committed on purpose** - it
@@ -112,16 +115,19 @@ or tokens in `src/input.css`.
 ## Layout
 
 ```
-index.html            the whole page
+index.html            the homepage - the definition of excogita
+cv.html               the CV, served at /cv
 src/input.css         Tailwind entry + design tokens (@theme) + custom CSS
 assets/css/main.css   compiled stylesheet - committed, do not edit by hand
 assets/js/main.js     copy-to-clipboard + accordion fallback (~40 lines)
 assets/favicon.svg    the AXH mark
 assets/icon-180.png   iOS home-screen icon
-assets/og.png         1200x630 link-preview card
+assets/og.png         1200x630 link-preview card for /cv
+assets/og-home.png    1200x630 link-preview card for /
 robots.txt            crawl blocklist, plus the allowed preview bots
 vite.config.js        dev server only
-tools/og.html         source for the link-preview card
+tools/og.html         source for the CV link-preview card
+tools/og-home.html    source for the homepage link-preview card
 tools/icon.html       source for the iOS icon raster
 tools/render-assets.sh regenerates both PNGs with headless Chrome
 ```
@@ -174,13 +180,19 @@ So future edits stay coherent:
   white, sized with `textLength` so the three letters fill the square whatever
   font the renderer picks - it stays legible at 16px. `assets/icon-180.png` is
   the same mark rasterised for iOS home screens. `assets/og.png` (1200×630) is
-  the share card: same paper, ink, moss and Newsreader as the site, listing the
+  the CV's share card (the homepage has its own, below): same paper, ink, moss and Newsreader as the site, listing the
   four capability lines. Both PNGs are generated from HTML with headless
   Chrome - regenerate them the same way if the design changes, and keep the OG
   image at exactly 1200×630.
-- **The footer.** The meaning of *excogita* sits after the contact panel as a
-  quiet sign-off. Keeping it out of the identity column brings the work closer
-  on mobile and leaves room for the section index on laptop screens.
+- **The homepage.** One centred dictionary entry. The headword is set as its
+  two morphemes (`.headword` / `.morph` in `input.css`), each underlined by a
+  bracket and glossed - *ex* "out", *cogita* "think". Nothing on it
+  animates. It shares the CV's tokens and fonts and loads no JavaScript. Its
+  share card, `assets/og-home.png`, repeats the bracketed headword and the
+  definition, with the name and domain in a footer rule so a preview reads as
+  a person's site. Its only link is "Read the CV" in the footer.
+- **The CV footer.** The meaning of *excogita* sits after the contact panel as
+  a quiet sign-off, and the word links back to the homepage.
 - **Motion.** One load moment: the columns rise in a short stagger. Nothing
   animates on its own after that, and `prefers-reduced-motion` disables it.
 - **Responsive.** Verified with no horizontal overflow from 320px up.
@@ -192,7 +204,7 @@ The site is hosted on **GitHub Pages** at `albanxhafa/excogita.al`, deployed by
 with pnpm, runs `pnpm build` (so a forgotten local build can never ship stale
 CSS), assembles `dist/` with `tools/build-dist.sh`, and publishes that.
 
-`dist/` holds only what the browser needs - `index.html`, `assets/`,
+`dist/` holds only what the browser needs - `index.html`, `cv.html`, `assets/`,
 `robots.txt`, `CNAME` and `.nojekyll`. Never `node_modules`, `src/`
 or `tools/`.
 
